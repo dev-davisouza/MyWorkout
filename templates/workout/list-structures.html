@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if is_bone %}
+        {% include "../partials/filter.html" %}
+    {% endif %}
+    <main class="main-content">
+        <section class="main-content-cards">
+            {% if is_description %}
+                <article class="main-content-cards card-opened">
+                    <header class="card-title">
+                        <h1> {{item.name}} </h1>
+                        <h4><em> {{item.scientific_name}} </em></h4>
+                    </header>
+                    <div class="card-description">
+                        <img src="{{item.cover.url}}" alt="" class="card-description-icon">
+                        {% if is_bone %}
+                            <details class="card-details">
+                                <summary>
+                                    <b>Associated Muscles:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for muscle in item.muscles.all %}
+                                        <li>{{muscle.scientific_name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>  
+                        {% endif %}
+                        {% if is_joint %}
+                            <details class="card-details">
+                                <summary>
+                                    <b>Allowed movements:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for move in item.allowed_movements.all %}
+                                        <li>{{move.type_name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>         
+                            <details class="card-details">
+                                <summary>
+                                    <b>Bones:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for bone in item.bones.all %}
+                                        <li>{{bone.name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>            
+                            <details class="card-details">
+                                <summary>
+                                    <b>Joint type:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for type in item.joint_type.all %}
+                                        <li>{{type.type_name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>                  
+                        {% endif %}
+                        {% if is_muscle %}
+                            <details class="card-details">
+                                <summary>
+                                    <b>Actions:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for act in item.action.all %}
+                                        <li>{{act.type_name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>   
+                            <details class="card-details">
+                                <summary>
+                                    <b>Origin:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% if item.origins.all %}
+                                        {% for head in item.origins.all %}
+                                            {% for bone in head.origin.all %}
+                                                <li>
+                                                    <em>{{ head.name }}</em> ({{bone.name}})
+                                                </li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for origin in item.origin.all %}
+                                            <li>{{origin}}</li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </details> 
+                            <details class="card-details">
+                                <summary>
+                                    <b>Insertion:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for insertion in item.insertion.all %}
+                                        <li>{{insertion.name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                            {% endif %}
+                            {% if is_exercise %}
+                                <details class="card-details">
+                                    <summary>
+                                        <b>Muscles worked:</b>
+                                    </summary>
+                                    <ul class="card-details-list">
+                                        {% for muscle in item.muscles.all %}
+                                            <li>{{muscle.name}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>
+                            {% endif %}
+                            <details class="card-details">
+                            <summary>
+                                <b>Description:</b>
+                            </summary>
+                            <ul>
+                                <li>
+                                    {{item.description|safe}}
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </article>
+            {% else %}
+                {% for item in items %}
+                    <article class="main-content-cards card">
+                        <header class="card-title">
+                            <h1> {{item.name}} </h1>
+                        </header>
+                        <img class="card-icon" src="{{item.cover.url}}" alt="">
+                        {% if is_muscle %}
+                            <a href="{% url "workout:muscle" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                        {% elif is_joint %}
+                            <a href="{% url "workout:joint" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                        {% elif is_bone %}
+                            <a href="{% url "workout:bone" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                        {% elif is_exercise %}
+                            <a href="{% url "workout:exercise" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+            {% endif %}
+        </section>
+    </main>
+{% endblock content %}

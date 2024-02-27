@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main-content">
+        <section class="main-content-cards">
+            <!-- Upper body -->
+            <article class="main-content-cards card">
+                <header class="card-title">
+                    <h1>Upper Body</h1>
+                </header>
+                <img id="Upperbody" class="card-icon" src="{% static 'img/icons/body_parts/upper-body (front).svg' %}" alt="Upper body">
+                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+            </article>
+
+            <!-- Lower body -->
+            <article class="main-content-cards card">
+                <header class="card-title">
+                    <h1>Lower Body</h1>
+                </header>
+                <img class="card-icon" src="{% static "img/icons/body_parts/legs.svg" %}" alt="Lower body">
+                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+            </article>
+
+            <!-- Push Day -->
+            <article class="main-content-cards card">
+                <header class="card-title">
+                    <h1>Push day</h1>
+                </header>
+                <img class="card-icon" src="{% static "img/icons/exercises/bench-press.svg" %}" alt="Push day">
+                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+            </article>
+
+            <!-- Pull Day -->
+            <article class="main-content-cards card">
+                <header class="card-title">
+                    <h1>Pull day</h1>
+                </header>
+                <img class="card-icon" src="{% static "img/icons/exercises/pull-up.svg" %}" alt="Pull day">
+                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+            </article>
+
+        </section>
+    </main>
+    <script>
+        var imageUrls = [
+            "{% static 'img/icons/body_parts/upper-body (front).svg' %}",
+            "{% static 'img/icons/body_parts/upper-body (back).svg' %}",
+        ];
+    
+        var currentIndex = 0;
+    
+        function changeImage() {
+            var imageElement = document.getElementById("Upperbody");
+            imageElement.src = imageUrls[currentIndex];
+    
+            currentIndex = (currentIndex + 1) % imageUrls.length;
+        }
+    
+        setInterval(changeImage, 2500);
+    </script>
+    
+{% endblock content %}

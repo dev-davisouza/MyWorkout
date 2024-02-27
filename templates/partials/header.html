@@ -1,0 +1,13 @@
+{% load static %}
+
+<header class="main-header">
+    <button class="toggle-button" onclick="toggleMenu()"><span class="expanded-letter">☰</span>Menu</button>
+    <a class="main-header-logo" href="{% url "home:homepage" %}"><img
+        src="{% static 'img/icons/my-workout-logo (no-background).svg' %}" alt="My Workout Logo"></a>
+
+    {% if user.is_authenticated %}
+        <a href="{% url "user:my-profile" %}"><img class="main-header-user-icon" src="{% static "img/icons/user.png" %}"alt=""></a>
+    {% else %}
+        <a href="{% url "user:register" %}"><img class="main-header-user-icon" src="{% static "img/icons/user.png" %}"alt=""></a>
+    {% endif %}
+</header>
