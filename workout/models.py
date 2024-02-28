@@ -7,6 +7,9 @@ class MovimentType(models.Model):
 
     def __str__(self):
         return self.type_name
+    
+    class Meta:
+        ordering = ['type_name']
 
 
 class Bone(models.Model):
@@ -48,6 +51,9 @@ class Joint(models.Model):
 
     def __str__(self):
         return self.name
+ 
+    class Meta:
+        ordering = ['name']
 
 
 class Muscle(models.Model):
@@ -76,12 +82,18 @@ class MuscleGroup(Muscle):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class BioMovimentType(models.Model):
     type_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.type_name
+
+    class Meta:
+        ordering = ['type_name']
 
 
 class Exercise(models.Model):
@@ -102,3 +114,6 @@ class Exercise(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']

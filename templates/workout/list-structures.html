@@ -63,9 +63,26 @@
                                     <b>Actions:</b>
                                 </summary>
                                 <ul class="card-details-list">
-                                    {% for act in item.action.all %}
+                                    {% if item.origins.all %}
+                                        {% for act in item.action.all %}
+                                            <li>
+                                                {{act.type_name}}:
+                                                {% for muscle in item.origins.all %}
+                                                    {% if act in muscle.action.all %}
+                                                        <em>{{muscle.name}}</em>,
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% for act in item.action.all %}
+                                            <li>{{act.type_name}}</li>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    <!--{% for act in item.action.all %}
                                         <li>{{act.type_name}}</li>
-                                    {% endfor %}
+                                    {% endfor %}--> 
                                 </ul>
                             </details>   
                             <details class="card-details">
