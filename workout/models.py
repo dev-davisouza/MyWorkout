@@ -73,6 +73,9 @@ class Muscle(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
 
 class MuscleGroup(Muscle):
     origins = models.ManyToManyField("Muscle", verbose_name="Heads (origins)",

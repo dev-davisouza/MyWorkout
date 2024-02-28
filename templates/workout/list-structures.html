@@ -69,7 +69,7 @@
                                                 {{act.type_name}}:
                                                 {% for muscle in item.origins.all %}
                                                     {% if act in muscle.action.all %}
-                                                        <em>{{muscle.name}}</em>,
+                                                        <em>{{muscle.name}}</em>;
                                                     {% endif %}
                                                 {% endfor %}
                                             </li>
@@ -79,10 +79,6 @@
                                             <li>{{act.type_name}}</li>
                                         {% endfor %}
                                     {% endif %}
-
-                                    <!--{% for act in item.action.all %}
-                                        <li>{{act.type_name}}</li>
-                                    {% endfor %}--> 
                                 </ul>
                             </details>   
                             <details class="card-details">
