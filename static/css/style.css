@@ -382,6 +382,95 @@ i {
     color: black;
 }
 
+
+/* Filtering form system */
+
+.filter-form{
+    display: flex;
+    margin: 16px;
+    padding: 8px;
+    background-color: #333;
+    border-radius: 30px;
+    box-sizing: border-box;
+    max-width: 220px;
+    max-height: 40px;
+}
+
+.filter-form-select{
+    cursor: pointer;
+    max-width: 130px;
+    text-align: right;
+    background-color: #333;
+    color: inherit;
+    border-radius: 30px;
+    border: none;
+}
+
+.filter-cta{
+    margin-left: 6px;
+    margin-right: 16px;
+    padding: 0 5px;
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid #2c2c2c;
+    transition: ease-in-out all 0.5s;
+}
+
+.filter-cta:hover{
+    background-color:#444;
+    transform: scale(1.05)
+}
+
+/* Search system */
+
+.search-form {
+    border: .2rem solid #444;
+    width: 50%;
+    margin: 15px auto;
+    border-radius: .4rem;
+    position: relative;
+    transition: all 300ms ease-in-out;
+}
+
+.search-input,
+.search-button {
+    color: white;
+    border: none;
+    background-color: #333333;
+    outline: none;
+    padding: 8px;
+}
+
+.search-button{
+    cursor: pointer;
+}
+
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.search-button:focus {
+    background: rgba(0, 0, 0, .1);
+}
+
+.search-input {
+    width: 100%;
+    padding-right: 40px;
+}
+
+.search-form:focus-within {
+    border-color: white;
+}
+
+.search-form:focus-within .search-button {
+    border-color: white;
+}
+
 /*Generics*/
 
 .flex-container{
@@ -416,44 +505,4 @@ i {
 .section-break{
     width: 75%;
     border-radius: 30px;
-}
-
-/* Filtering form system */
-
-.filter-form{
-    display: flex;
-    margin: 16px;
-    padding: 8px;
-    background-color: #333;
-    border-radius: 30px;
-    box-sizing: border-box;
-    max-width: 220px;
-}
-
-.filter-form-select{
-    cursor: pointer;
-    max-width: 130px;
-    text-align: right;
-    background-color: #333;
-    color: inherit;
-    border-radius: 30px;
-    border: none;
-}
-
-.filter-cta{
-    margin-left: 6px;
-    margin-right: 16px;
-    padding: 0 5px;
-    background-color: #2c2c2c;
-    border-radius: 8px;
-    color: inherit;
-    cursor: pointer;
-    font-family: inherit;
-    border: 1px solid #2c2c2c;
-    transition: ease-in-out all 0.5s;
-}
-
-.filter-cta:hover{
-    background-color:#444;
-    transform: scale(1.05)
 }

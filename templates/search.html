@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="main-content">
+        <section class="main-content-cards">
+            {% include "partials/filter.html" %}
+            {% for obj in objects %}
+                {% for item in obj %}
+                    <article class="main-content-cards card">
+                        <header class="card-title">
+                            <h1> {{item.name}} </h1>
+                        </header>
+                        <img class="card-icon" src="{{item.cover.url}}" alt="">
+                        <a href="{{get_absolute_url}}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                    </article>
+                {% endfor %}
+            {% endfor %}
+        </section>
+    </main>
+{% endblock content %}

@@ -143,15 +143,7 @@
                             <h1> {{item.name}} </h1>
                         </header>
                         <img class="card-icon" src="{{item.cover.url}}" alt="">
-                        {% if is_muscle %}
-                            <a href="{% url "workout:muscle" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
-                        {% elif is_joint %}
-                            <a href="{% url "workout:joint" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
-                        {% elif is_bone %}
-                            <a href="{% url "workout:bone" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
-                        {% elif is_exercise %}
-                            <a href="{% url "workout:exercise" item.slug %}" class="card-cta"><b>Know the {{item.name}}!</b></a>
-                        {% endif %}
+                        <a href="{{get_absolute_url}}" class="card-cta"><b>Know the {{item.name}}!</b></a>
                     </article>
                 {% endfor %}
             {% endif %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.urls import reverse
 
 
 class MovimentType(models.Model):
@@ -7,7 +8,7 @@ class MovimentType(models.Model):
 
     def __str__(self):
         return self.type_name
-    
+
     class Meta:
         ordering = ['type_name']
 
@@ -27,6 +28,9 @@ class Bone(models.Model):
 
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('workout:bone', kwargs={"slug": self.slug})
 
 
 class JointType(models.Model):
@@ -51,9 +55,12 @@ class Joint(models.Model):
 
     def __str__(self):
         return self.name
- 
+
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('workout:joint', kwargs={"slug": self.slug})
 
 
 class Muscle(models.Model):
@@ -87,6 +94,9 @@ class MuscleGroup(Muscle):
 
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('workout:muscle', kwargs={"slug": self.slug})
 
 
 class BioMovimentType(models.Model):

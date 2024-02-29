@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 from . import models
 
 
@@ -78,3 +79,42 @@ def know_exercise(request, slug):
         "is_exercise": True,
     }
     return render(request, "workout/list-structures.html", context)
+
+
+def search(request):
+    search_term = request.GET.get("q")
+    if search_term is not None:
+        search_term = search_term.strip()
+    else:
+        search_term = ""
+
+    # Getting the objects:
+    muscles = models.MuscleGroup.objects.filter(
+        Q(
+            Q(name__icontains=search_term) |
+            Q(scientific_name__icontains=search_term)
+        ),
+    )
+
+    joints = models.Joint.objects.filter(
+        Q(
+            Q(name__icontains=search_term)
+        ),
+    )
+
+    bones = models.Bone.objects.filter(
+        Q(
+            Q(name__icontains=search_term)
+        ),
+    )
+
+    objects = [bones, joints, muscles]
+
+    if not search_term or not bones and not muscles and not joints:
+        return render(request, 'partials/404.html', status=404)
+
+    return render(request, 'search.html', context={
+        'search_term': search_term,
+        'objects': objects,
+        'is_search': True,
+    })
