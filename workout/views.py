@@ -82,6 +82,7 @@ def know_exercise(request, slug):
 
 
 def search(request):
+    # Search system
     search_term = request.GET.get("q")
     if search_term is not None:
         search_term = search_term.strip()
@@ -108,13 +109,27 @@ def search(request):
         ),
     )
 
-    objects = [bones, joints, muscles]
+    filter_by = request.GET.get('filter_by')
+    if filter_by is not None:
+        if filter_by == 'all':  # All structures
+            pass
+        elif filter_by == 'bone':  # Just bones
+            objects = [bones,] 
+        elif filter_by == 'joint':  # Just joints
+            objects = [joints,] 
+        elif filter_by == 'muscle':  # Just muscles
+            objects = [muscles,] 
+    else:
+        objects = [bones, joints, muscles]
 
     if not search_term or not bones and not muscles and not joints:
         return render(request, 'partials/404.html', status=404)
+
+    filter_str = f'q={search_term}&filter_by={filter_by}'
 
     return render(request, 'search.html', context={
         'search_term': search_term,
         'objects': objects,
         'is_search': True,
+        'filter': filter_str,
     })

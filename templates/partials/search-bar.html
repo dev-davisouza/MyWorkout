@@ -1,6 +1,22 @@
-<div class="flex-container centered-x">
-    <form action="{% url "workout:search" %}" method="GET" class="search-form">
-        <input type="search" class="search-input" name="q" value="{{search_term}}" required>
-        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+{% load static %}
+
+    <form action="{% url 'workout:search' %}" method="GET" class="search-form flex-container centered-y">
+        <div class="search-container flex-container space-between centered-y centered-x">
+            <input type="search" class="search-input" name="q" value="{{ request.GET.q }}" required>
+            <button type="submit" class="search-button"><img style="height: 20px;" src="{% static "img/icons/search.png" %}" alt=""></button>
+        </div>
+
+        {% if is_search %}
+            <div class="filter-form">
+                <select class="filter-form-select" name="filter_by">
+                    <option value="all" {% if not request.GET.filter_by or request.GET.filter_by == 'all' %}selected{% endif %}>All structures</option>
+                    <option value="bone" {% if request.GET.filter_by == 'bone' %}selected{% endif %}>Bones</option>
+                    <option value="joint" {% if request.GET.filter_by == 'joint' %}selected{% endif %}>Joints</option>
+                    <option value="muscle" {% if request.GET.filter_by == 'muscle' %}selected{% endif %}>Muscles</option>
+                </select>
+                <button type="submit" class="filter-cta">Filter</button>
+            </div>
+        {% endif %}   
     </form>
-</div>
+
+

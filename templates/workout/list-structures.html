@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
     {% if is_bone %}
-        {% include "../partials/filter.html" %}
+        <div class="flex-container justify-right">
+            <form action="" method="GET" class="filter-form">
+                <select class="filter-form-select" name="is_spine_bone">
+                    <option value="0"><a href="?is_spine_bone=0">Show All Bones</a></option>
+                    <option value="1"><a href="?is_spine_bone=1">Show Vertebras</a></option>
+                    <option value="2"><a href="?is_spine_bone=2">All bones (except vertebra)</a></option>
+                </select>
+                <button type="submit" class="filter-cta">Filter</button>
+            </form>
+        </div>
     {% endif %}
     <main class="main-content">
         <section class="main-content-cards">
@@ -143,7 +152,7 @@
                             <h1> {{item.name}} </h1>
                         </header>
                         <img class="card-icon" src="{{item.cover.url}}" alt="">
-                        <a href="{{get_absolute_url}}" class="card-cta"><b>Know the {{item.name}}!</b></a>
+                        <a href="{{item.get_absolute_url}}" class="card-cta"><b>Know the {{item.name}}!</b></a>
                     </article>
                 {% endfor %}
             {% endif %}
