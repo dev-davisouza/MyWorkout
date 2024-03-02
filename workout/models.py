@@ -17,11 +17,12 @@ class Bone(models.Model):
     name = models.CharField("Bone name", max_length=50)
     cover = models.FileField(upload_to="images/bones/%Y/%m/%d/", validators=[
         FileExtensionValidator(['svg'])
-    ])
+    ], blank=True)
     description = models.TextField("Some description of the bone")
     muscles = models.ManyToManyField("Muscle", blank=True)
     slug = models.CharField(blank=True, max_length=50)
     is_spine_bone = models.BooleanField(blank=True, default=False)
+    is_skull_bone = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
         return self.name

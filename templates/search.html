@@ -3,7 +3,6 @@
 {% block content %}
     <main class="main-content">
         <section class="main-content-cards">
-            {% include "partials/filter.html" %}
             {% for obj in objects %}
                 {% for item in obj %}
                     <article class="main-content-cards card">
