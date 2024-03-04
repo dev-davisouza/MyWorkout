@@ -121,18 +121,40 @@
                                 </ul>
                             </details>
                             {% endif %}
-                            {% if is_exercise %}
-                                <details class="card-details">
-                                    <summary>
-                                        <b>Muscles worked:</b>
-                                    </summary>
-                                    <ul class="card-details-list">
-                                        {% for muscle in item.muscles.all %}
-                                            <li>{{muscle.name}}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </details>
-                            {% endif %}
+                        {% if is_exercise %}
+                            <details class="card-details">
+                                <summary>
+                                    <b>Muscles worked:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for muscle in item.muscles.all %}
+                                        <li>{{muscle.name}}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                            <details class="card-details">
+                                <summary>
+                                    <b>Resistance profile:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    <li>{{item.get_resistance_profile_display}}</li>
+                                </ul>
+                            </details>
+                            <details class="card-details">
+                                <summary>
+                                    <b>Equipment:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% if item.is_dumbell %}
+                                        <li>Dumbell</li>
+                                    {% elif item.is_barbell %}
+                                        <li>Barbell</li>
+                                    {% elif item.is_cable %}
+                                        <li>Cable</li>
+                                    {% endif %}
+                                </ul>
+                            </details>
+                        {% endif %}
                             <details class="card-details">
                             <summary>
                                 <b>Description:</b>

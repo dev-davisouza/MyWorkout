@@ -137,11 +137,12 @@ class Exercise(models.Model):
     slug = models.SlugField(unique=True, default="")
     resistance_profile = models.CharField("Resistance profile",
                                           choices=RES_PROFILE,
-                                          max_length=3)
+                                          max_length=3,
+                                          blank=True)
     is_dumbell = models.BooleanField(default=False)
     is_barbell = models.BooleanField(default=False)
     is_cable = models.BooleanField(default=False)
-    sets = models.IntegerField("Number of sets", blank=True)
+    sets = models.IntegerField("Number of sets", blank=True, default=0)
 
     def __str__(self):
         return self.name
