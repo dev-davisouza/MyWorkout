@@ -9,4 +9,3 @@ admin.site.register(models.MovimentType)
 admin.site.register(models.Muscle)
 admin.site.register(models.BioMovimentType)
 admin.site.register(models.MuscleGroup)
-

@@ -1,6 +1,6 @@
 1. Create bones; <-- Complete
 2. Create joints; <-- Complete
-3. Create muscles;
+3. Create muscles; <-- Complete
 4. Create exercises;
 5. Create workout;
 6. Create Json response as an API!
