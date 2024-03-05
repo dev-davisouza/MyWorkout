@@ -142,7 +142,9 @@ class Exercise(models.Model):
     is_dumbell = models.BooleanField(default=False)
     is_barbell = models.BooleanField(default=False)
     is_cable = models.BooleanField(default=False)
+    is_machine = models.BooleanField(default=False)
     sets = models.IntegerField("Number of sets", blank=True, default=0)
+    steps = models.TextField("Steps", blank=True)
 
     def __str__(self):
         return self.name

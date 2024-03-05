@@ -120,7 +120,7 @@
                                     {% endfor %}
                                 </ul>
                             </details>
-                            {% endif %}
+                        {% endif %}
                         {% if is_exercise %}
                             <details class="card-details">
                                 <summary>
@@ -151,7 +151,17 @@
                                         <li>Barbell</li>
                                     {% elif item.is_cable %}
                                         <li>Cable</li>
+                                    {% elif item.is_machine %}
+                                        <li>Machine</li>
                                     {% endif %}
+                                </ul>
+                            </details>
+                            <details class="card-details">
+                                <summary>
+                                    <b>How to do {{item.name}}:</b>
+                                </summary>
+                                <ul>
+                                    {{item.steps|safe}}
                                 </ul>
                             </details>
                         {% endif %}
