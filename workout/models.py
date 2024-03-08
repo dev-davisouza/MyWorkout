@@ -79,6 +79,7 @@ class Muscle(models.Model):
     ], blank=True)
     description = models.TextField("Some description of the muscle",
                                    blank=True)
+    related_exercises = models.ManyToManyField("Exercise")
 
     def __str__(self):
         return self.name
@@ -133,7 +134,8 @@ class Exercise(models.Model):
     description = models.TextField("Exercise description")
     difficulty = models.CharField("Select the difficulty", max_length=1,
                                   choices=EXERCISE_DIFFICULTY)
-    muscles = models.ManyToManyField("Muscle")
+    muscles = models.ManyToManyField("Muscle", related_name="Muscle", blank=True)
+    muscle_group = models.ManyToManyField("MuscleGroup", related_name="MuscleGroup")
     slug = models.SlugField(unique=True, default="")
     resistance_profile = models.CharField("Resistance profile",
                                           choices=RES_PROFILE,

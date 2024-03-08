@@ -158,6 +158,16 @@ i {
     margin-top: 8px;
 }
 
+.card-details-list a{
+    text-decoration: solid;
+    color: yellow;
+    transition: all 0.5s ease;
+}
+
+.card-details-list a:hover{
+    color: white;
+}
+
 .card:hover{
     background-color: #666666;
 }

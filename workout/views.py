@@ -15,8 +15,13 @@ def bones(request):
     else:
         bones = models.Bone.objects.all()
 
-    return render(request, "workout/list-structures.html",
-                  {"items": bones, "is_bone": True})
+    context = {
+        "items": bones,
+        "is_bone": True,
+        "title": "Bones - ",
+    }
+
+    return render(request, "workout/list-structures.html", context)
 
 
 def know_bone(request, slug):
@@ -24,7 +29,8 @@ def know_bone(request, slug):
     context = {
         'is_description': True,
         'item': bone,
-        'is_bone': True,
+        'is_bone_detail': True,
+        "title": f"{bone.name} - ",
     }
     return render(request, "workout/list-structures.html",
                   context)
@@ -33,8 +39,13 @@ def know_bone(request, slug):
 def joints(request):
     joints = models.Joint.objects.all()
 
-    return render(request, "workout/list-structures.html",
-                  {"items": joints, "is_joint": True})
+    context = {
+        "items": joints,
+        "is_joint": True,
+        "title": "Joints - ",
+    }
+
+    return render(request, "workout/list-structures.html", context)
 
 
 def know_joint(request, slug):
@@ -43,6 +54,8 @@ def know_joint(request, slug):
         "item": joint,
         'is_description': True,
         "is_joint": True,
+        "title": f"{joint.name} - ",
+
     }
     return render(request, "workout/list-structures.html",
                   context)
@@ -50,8 +63,13 @@ def know_joint(request, slug):
 
 def muscles(request):
     muscles = models.MuscleGroup.objects.all()
-    return render(request, "workout/list-structures.html",
-                  {"items": muscles, "is_muscle": True})
+    context = {
+        "items": muscles,
+        "is_muscle": True,
+        "title": "Muscles - ",
+    }
+
+    return render(request, "workout/list-structures.html", context)
 
 
 def know_muscle(request, slug):
@@ -60,6 +78,7 @@ def know_muscle(request, slug):
         'item': muscle,
         'is_description': True,
         "is_muscle": True,
+        "title": f"{muscle.name} - ",
     }
     return render(request, "workout/list-structures.html", context)
 
@@ -67,7 +86,9 @@ def know_muscle(request, slug):
 def exercises(request):
     exercises = models.Exercise.objects.all()
     context = {'items': exercises,
-               'is_exercise': True, }
+               'is_exercise': True, 
+               "title": "Exercises - ",}
+    
     return render(request, "workout/list-structures.html", context)
 
 
@@ -77,6 +98,7 @@ def know_exercise(request, slug):
         'item': exercise,
         'is_description': True,
         "is_exercise": True,
+        "title": f"{exercise.name} - ",
     }
     return render(request, "workout/list-structures.html", context)
 
@@ -132,4 +154,5 @@ def search(request):
         'objects': objects,
         'is_search': True,
         'filter': filter_str,
+        "title": f"'{search_term}' - ",
     })

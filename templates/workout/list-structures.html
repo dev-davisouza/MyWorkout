@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}{{title}}{% endblock title %}
 {% block content %}
     {% if is_bone %}
         <div class="flex-container justify-right">
@@ -22,17 +23,19 @@
                     </header>
                     <div class="card-description">
                         <img src="{{item.cover.url}}" alt="" class="card-description-icon">
-                        {% if is_bone %}
-                            <details class="card-details">
-                                <summary>
-                                    <b>Associated Muscles:</b>
-                                </summary>
-                                <ul class="card-details-list">
-                                    {% for muscle in item.muscles.all %}
-                                        <li>{{muscle.scientific_name}}</li>
-                                    {% endfor %}
-                                </ul>
-                            </details>  
+                        {% if is_bone_detail %}
+                            {% if muscles %}
+                                <details class="card-details">
+                                    <summary>
+                                        <b>Associated Muscles:</b>
+                                    </summary>
+                                    <ul class="card-details-list">
+                                        {% for muscle in item.muscles.all %}
+                                            <li>{{muscle.scientific_name}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </details>  
+                            {% endif %}
                         {% endif %}
                         {% if is_joint %}
                             <details class="card-details">
@@ -51,7 +54,7 @@
                                 </summary>
                                 <ul class="card-details-list">
                                     {% for bone in item.bones.all %}
-                                        <li>{{bone.name}}</li>
+                                        <li><a href="{{bone.get_absolute_url}}">{{bone.name}}</a></li>
                                     {% endfor %}
                                 </ul>
                             </details>            
@@ -99,13 +102,13 @@
                                         {% for head in item.origins.all %}
                                             {% for bone in head.origin.all %}
                                                 <li>
-                                                    <em>{{ head.name }}</em> ({{bone.name}})
+                                                    <em>{{ head.name }}</em> (<a href="{{bone.get_absolute_url}}">{{bone.name}}</a>)
                                                 </li>
                                             {% endfor %}
                                         {% endfor %}
                                     {% else %}
                                         {% for origin in item.origin.all %}
-                                            <li>{{origin}}</li>
+                                            <li><a href="{{origin.get_absolute_url}}">{{origin.name}}</a></li>
                                         {% endfor %}
                                     {% endif %}
                                 </ul>
@@ -116,7 +119,17 @@
                                 </summary>
                                 <ul class="card-details-list">
                                     {% for insertion in item.insertion.all %}
-                                        <li>{{insertion.name}}</li>
+                                        <li><a href="{{insertion.get_absolute_url}}">{{insertion.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
+                            <details class="card-details">
+                                <summary>
+                                    <b>Related exercises:</b>
+                                </summary>
+                                <ul class="card-details-list">
+                                    {% for exercise in item.related_exercises.all %}
+                                        <li><a href="{{exercise.get_absolute_url}}">{{exercise.name}}</a></li>
                                     {% endfor %}
                                 </ul>
                             </details>
@@ -127,6 +140,9 @@
                                     <b>Muscles worked:</b>
                                 </summary>
                                 <ul class="card-details-list">
+                                    {% for muscle in item.muscle_group.all %}
+                                        <li><a href="{{muscle.get_absolute_url}}">{{muscle.name}}</a></li>
+                                    {% endfor %}
                                     {% for muscle in item.muscles.all %}
                                         <li>{{muscle.name}}</li>
                                     {% endfor %}
