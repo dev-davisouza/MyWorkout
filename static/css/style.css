@@ -189,8 +189,9 @@ i {
     color: black;
     background-color: yellow;
     padding: 20px;
-    margin: auto 20px 20px;
+    margin: auto auto 20px;
     transition: transform 0.5s ease;
+    box-sizing: border-box;
 }
 
 .card-cta:hover{
@@ -201,8 +202,20 @@ i {
     max-height: 350px;
 }
 
-/* Form */
+.card-downloads{
+    padding: 0;
+    margin: 10px 0;
+}
 
+.card-downloads li{
+    display: inline;
+}
+
+.card-downloads-icons{
+    height: 30px;
+}
+
+/* Form */
 .form-content{
     /* Rules */
     margin: 40px auto;
@@ -286,6 +299,7 @@ i {
     display: flex;
     flex-flow: column nowrap;
     gap: 24px;
+    width: 75%;
 }
 
 .message {
@@ -446,14 +460,12 @@ i {
     border-radius: 4px;
     height: fit-content;
     transition: all 300ms ease-in-out;
-
 }
 
 .search-input {
     width: 100%;
     padding-right: 40px;
     margin:0;
-
 }
 
 .search-input,
@@ -491,6 +503,52 @@ i {
     box-sizing: border-box;
     width: fit-content;
     max-height: 40px;
+}
+
+/* User page */
+.user-container{
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.175);
+    border-radius: 8px;
+    width: 100%;
+    padding: 50px;
+}
+
+.my-workouts-container{
+    border: 1px solid #666666;
+    border-radius: 8px;
+    width: 30%;
+    padding: 10px;
+}
+
+.another-container{
+    border: 1px solid #666666;
+    border-radius: 8px;
+    width: 60%;
+    padding: 10px;
+}
+
+.user-card-details{
+    padding: 16px;
+    text-align: center;
+    background-color: #333333;
+    margin: 0;
+    margin-bottom: 8px;
+    border-radius: 10px;
+}
+
+.user-card-details-list{
+    text-align: start;
+    padding: 0;
+    margin: 0;
+}
+
+.user-card-details-list li{
+    margin-top: 8px;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border: 2px solid black;
 }
 
 /*Generics*/
@@ -532,3 +590,4 @@ i {
 .space-between{
     justify-content: space-between;
 }
+

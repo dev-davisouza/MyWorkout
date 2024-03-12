@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.db.models import Q
 from . import models
+from .forms import WorkoutForm
 
 
 def bones(request):
@@ -86,9 +87,9 @@ def know_muscle(request, slug):
 def exercises(request):
     exercises = models.Exercise.objects.all()
     context = {'items': exercises,
-               'is_exercise': True, 
-               "title": "Exercises - ",}
-    
+               'is_exercise': True,
+               "title": "Exercises - ", }
+
     return render(request, "workout/list-structures.html", context)
 
 
@@ -156,3 +157,30 @@ def search(request):
         'filter': filter_str,
         "title": f"'{search_term}' - ",
     })
+
+
+def add_workout(request):
+    if request.method == 'POST':
+        form = WorkoutForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.user = request.user
+            f.save()
+            return redirect('user:my-profile')
+
+    context = {
+        'form': form,
+        'is_add_workout': True,
+    }
+    form = WorkoutForm()
+    return render(request, "user/myworkout/myworkouts.html", context)
+
+
+def view_myworkout(request, slug):
+    workout = models.Workout.objects.get(slug=slug)
+    context = {
+        'item': workout,
+        'is_myworkout': True,
+        "title": f"{workout.name} - ",
+    }
+    return render(request, "user/myworkout/myworkouts.html", context)

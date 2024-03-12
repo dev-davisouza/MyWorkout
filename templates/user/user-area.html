@@ -2,8 +2,38 @@
 {% load static %}
 
 {% block content %}
+    <a href="{% url "user:logout" %}">
+        <img src="{% static "img/icons/exit.svg" %}"
+        alt=""
+        style="height:64px; border: 2px solid white;">
+    </a>
     <main class="main-content">
-
+        <div class="user-container">
+            <section class="my-workouts-container">
+                {% if not my_workouts %}
+                    <a href="{% url "workout:add-workout" %}">+ Add Workout</a>
+                {% else %}
+                    <details class="user-card-details">
+                        <summary>
+                            My Workouts:
+                        </summary>
+                        <ul class="user-card-details-list">
+                            {% for workout in my_workouts %}
+                                <li style="height:16px;">
+                                    <a href="{{workout.get_absolute_url}}">
+                                        <span style="font-size:10px; vertical-align: middle;">➤</span> {{workout.name}}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </details>
+                {% endif %}
+            </section>
+            <section class="another-container">
+                oi
+            </section>
+        </div>
+       
     </main>
     
 {% endblock content %}

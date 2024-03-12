@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout  # noqa
+from .forms import RegisterUserForm, LoginForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from .forms import RegisterUserForm
+from .models import User
+from workout.models import Workout
 
 
 def register_get(request):
@@ -10,7 +12,8 @@ def register_get(request):
     form = RegisterUserForm(register_form_data)
     return render(request, 'user/register.html', {
         'form': form,
-        "title": 'Register | '
+        "title": 'Register | ',
+        'is_register': True,
     })
 
 
@@ -23,12 +26,16 @@ def register_post(request):
     form = RegisterUserForm(POST)
 
     if form.is_valid():
-        form.save()
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password1']
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        messages.success(request, "Your user was created; now you're logged in!")
+        django_user = User.objects.create_user(
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password'],
+            email=form.cleaned_data['email'],
+            first_name=form.cleaned_data['first_name'],
+            last_name=form.cleaned_data['last_name']
+        )
+        user = form.save(commit=False)
+        user.user = django_user
+        user.save()
 
         del (request.session['register_form_data'])
         return redirect('home:homepage')
@@ -36,5 +43,46 @@ def register_post(request):
     return redirect("user:register")
 
 
+def login_user(request):
+    if request.user.is_authenticated:
+        return redirect("home:homepage")
+    form = LoginForm()
+    return render(request, 'user/register.html', {
+        'form': form,
+        'is_login': True,
+    })
+
+
+def treat_post_login(request):
+    if not request.POST:
+        return redirect('user:login')
+
+    form = LoginForm(request.POST)
+
+    if form.is_valid():
+        authenticated_user = authenticate(
+            username=form.cleaned_data.get('username', ''),
+            password=form.cleaned_data.get('password', ''),
+        )
+
+        if authenticated_user is not None:
+            login(request, authenticated_user)
+            messages.success(request, "You are logged in now. Enjoy it!")
+            return redirect('user:my-profile')
+        else:
+            messages.error(request, 'Invalid credentials')
+
+    return redirect('user:login')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home:homepage')
+
+
 def my_profile(request):
-    return render(request, "user/user-area.html", context={})
+    my_workouts = Workout.objects.filter(user=request.user)
+    context = {
+        'my_workouts': my_workouts,
+    }
+    return render(request, "user/user-area.html", context)

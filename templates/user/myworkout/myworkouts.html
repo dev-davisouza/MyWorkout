@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <main class="main-content">
+        {% if is_add_workout %}
+            <form action="" method=POST>
+                {% csrf_token %}
+                {{form}}
+                <button class="form-cta" type="submit">Submit</button>
+            </form>
+        {% elif is_myworkout %}
+            aló
+        {% endif %}
+    </main>
+{% endblock content %}

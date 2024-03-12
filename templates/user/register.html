@@ -2,11 +2,25 @@
 
 {% block content %}
     <div class="form-content">
-        <h1>Register Yourself</h1>
-        <form action="{% url "user:treat_data" %}" method=POST>
-            {% csrf_token %}
-            {{form}}
-            <button class="form-cta" type="submit">Submit</button>
-        </form>
+        {% if is_register %}
+            <h1>Register Yourself</h1>
+        {% elif is_login %}
+            <h1>Login</h1>
+        {% endif %}
+        {% if is_register %}
+            <form action="{% url "user:treat_data" %}" method=POST>
+                {% csrf_token %}
+                {{form}}
+                <button class="form-cta" type="submit">Submit</button>
+            </form>
+        {% endif %}
+        {% if is_login %}
+            <form action="{% url "user:treat-login" %}" method=POST>
+                {% csrf_token %}
+                {{form}}
+                <button class="form-cta" type="submit">Submit</button>
+            </form>
+            <p>You alredy don't have an account?<a href="{% url "user:register" %}">Click here!</a></p>
+        {% endif %}
     </div>
 {% endblock content %}

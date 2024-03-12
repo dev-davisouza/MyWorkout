@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 # Human body section:
@@ -195,8 +196,7 @@ class Exercise(models.Model):
                f"mechanism of your body, which is what you are seeking in your training, as this will generate "
                f"hypertrophy in the target muscle of the exercise!")
 
-    count_reps = models.IntegerField(blank=True)
-    intial_margin_expected_reps = models.IntegerField("Min. of reps:")
+    initial_margin_expected_reps = models.IntegerField("Min. of reps:")
     final_margin_expected_reps = models.IntegerField("Max. of reps:")
 
     set_type = models.CharField(choices=SetTypeChoice.choices,
@@ -209,4 +209,48 @@ class Exercise(models.Model):
         return self.set_type
 
     def get_set_type_description(self):
-        return self.SetTypeChoice(self.set_type).label"""
+        return self.SetTypeChoice(self.set_type).label
+"""
+
+
+class SetExerciseRelationship(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    sets = models.IntegerField("Qty of Sets", default=1)
+    initial_margin_expected_reps = models.IntegerField("Min. of reps:", blank=True)
+    final_margin_expected_reps = models.IntegerField("Max. of reps:", blank=True)
+
+    def __str__(self):
+        if self.initial_margin_expected_reps and not self.final_margin_expected_reps:
+            return f"{self.exercise.name} {self.sets}x{self.initial_margin_expected_reps}"
+
+        elif self.final_margin_expected_reps and not self.initial_margin_expected_reps:
+            return f"{self.exercise.name} {self.sets}x{self.final_margin_expected_reps}"
+
+        elif self.initial_margin_expected_reps and self.final_margin_expected_reps:
+            return f"{self.exercise.name} {self.sets}x{self.initial_margin_expected_reps}-{self.final_margin_expected_reps}"
+
+        elif not self.final_margin_expected_reps and not self.initial_margin_expected_reps:
+            return f"{self.sets} of {self.exercise.name}"
+
+        else:
+            return f"{self.exercise.name}"
+
+
+class Workout(models.Model):
+    name = models.CharField("Workout name", max_length=50, blank=True)
+    set_exercise_relationships = models.ManyToManyField(SetExerciseRelationship,
+                                                        blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    slug = models.SlugField(unique=True, default="")
+
+    def get_absolute_url(self):
+        return reverse('workout:workout', kwargs={"slug": self.slug})
+
+
+    """def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f"Workout #{self.pk}" if self.pk is not None else f"Workout #{self.id}"
+        super().save(*args, **kwargs)"""
+
+    def __str__(self):
+        return self.name

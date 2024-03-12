@@ -14,4 +14,6 @@ urlpatterns = [
     path('joints/<slug>/', views.know_joint, name="joint"),
     path('exercises/<slug>/', views.know_exercise, name="exercise"),
     path('search/', views.search, name="search"),
+    path('add-workout/', views.add_workout, name="add-workout"),
+    path('myworkout/<slug>', views.view_workout, name="myworkout"),
 ]

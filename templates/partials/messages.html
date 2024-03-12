@@ -1,12 +1,14 @@
 {% if messages %}
-<div class="main-content container messages-container">
-    {% for message in messages %}
-        <div class="message {{ message.tags }}">
-            <center>
-                {{ message }}
-                <button class="close-message" onclick="closeMessage(this)">X</button>
-            </center>
+    <div class="flex-container centered-x">
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    <center>
+                        {{ message }}
+                        <button class="close-message" onclick="closeMessage(this)">X</button>
+                    </center>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
+    </div>
 {% endif %}
