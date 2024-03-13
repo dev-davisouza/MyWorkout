@@ -1,14 +1,17 @@
 {% extends "base.html" %}
+{% block title %}{{title}}{% endblock title %}
 {% block content %}
     <main class="main-content">
-        {% if is_add_workout %}
+        {% if is_add_workout or is_add_set_exercise_relationship %}
+        <div class="form-content">
             <form action="" method=POST>
                 {% csrf_token %}
                 {{form}}
                 <button class="form-cta" type="submit">Submit</button>
             </form>
+        </div>
         {% elif is_myworkout %}
-            aló
+            {% include "./partials/workout-card.html" %}
         {% endif %}
     </main>
 {% endblock content %}

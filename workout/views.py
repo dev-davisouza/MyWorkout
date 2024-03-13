@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.db.models import Q
 from . import models
-from .forms import WorkoutForm
+from .forms import WorkoutForm, SetExerciseRelationshipForm
 
 
 def bones(request):
@@ -159,6 +159,24 @@ def search(request):
     })
 
 
+def add_set_exercise_relationship(request):
+    if request.method == 'POST':
+        form = SetExerciseRelationshipForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.user = request.user
+            f.save()
+            return redirect('user:my-profile')
+
+    form = SetExerciseRelationshipForm()
+    context = {
+        'form': form,
+        'is_add_set_exercise_relationship': True,
+        "title": "Add Set X Exercise relationship - ",
+    }
+    return render(request, "user/myworkout/myworkouts.html", context)
+
+
 def add_workout(request):
     if request.method == 'POST':
         form = WorkoutForm(request.POST)
@@ -167,20 +185,26 @@ def add_workout(request):
             f.user = request.user
             f.save()
             return redirect('user:my-profile')
+    form = WorkoutForm()
 
     context = {
         'form': form,
         'is_add_workout': True,
+        "title": "Make Workout - ",
     }
-    form = WorkoutForm()
     return render(request, "user/myworkout/myworkouts.html", context)
 
 
 def view_myworkout(request, slug):
     workout = models.Workout.objects.get(slug=slug)
+    count_exercises = workout.set_exercise_relationships.all()
+    count = 0
+    for _ in count_exercises:
+        count += 1
     context = {
         'item': workout,
         'is_myworkout': True,
         "title": f"{workout.name} - ",
+        "total_exercises": count,
     }
     return render(request, "user/myworkout/myworkouts.html", context)

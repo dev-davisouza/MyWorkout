@@ -129,6 +129,11 @@ i {
     animation: floatAnimation 4s ease-in-out infinite;
 }
 
+.card-section{
+    display: flex;
+    flex-direction: column;
+}
+
 /* CSS keyframes for the floatAnimation */
 @keyframes floatAnimation {
     0%, 100% {
@@ -205,6 +210,10 @@ i {
 .card-downloads{
     padding: 0;
     margin: 10px 0;
+}
+
+.card-downloads a{
+    text-decoration: none;
 }
 
 .card-downloads li{

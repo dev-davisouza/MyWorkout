@@ -216,8 +216,9 @@ class Exercise(models.Model):
 class SetExerciseRelationship(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     sets = models.IntegerField("Qty of Sets", default=1)
-    initial_margin_expected_reps = models.IntegerField("Min. of reps:", blank=True)
-    final_margin_expected_reps = models.IntegerField("Max. of reps:", blank=True)
+    initial_margin_expected_reps = models.IntegerField("Min. of reps: (opcional)", blank=True)
+    final_margin_expected_reps = models.IntegerField("Max. of reps: (opcional)", blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         if self.initial_margin_expected_reps and not self.final_margin_expected_reps:
@@ -244,13 +245,7 @@ class Workout(models.Model):
     slug = models.SlugField(unique=True, default="")
 
     def get_absolute_url(self):
-        return reverse('workout:workout', kwargs={"slug": self.slug})
-
-
-    """def save(self, *args, **kwargs):
-        if not self.name:
-            self.name = f"Workout #{self.pk}" if self.pk is not None else f"Workout #{self.id}"
-        super().save(*args, **kwargs)"""
+        return reverse('workout:myworkout', kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.name

@@ -11,7 +11,7 @@
         <div class="user-container">
             <section class="my-workouts-container">
                 {% if not my_workouts %}
-                    <a href="{% url "workout:add-workout" %}">+ Add Workout</a>
+                    <a style="color: inherit;" href="{% url "workout:add-workout" %}">+ Add Workout</a>
                 {% else %}
                     <details class="user-card-details">
                         <summary>
@@ -19,7 +19,7 @@
                         </summary>
                         <ul class="user-card-details-list">
                             {% for workout in my_workouts %}
-                                <li style="height:16px;">
+                                <li>
                                     <a href="{{workout.get_absolute_url}}">
                                         <span style="font-size:10px; vertical-align: middle;">➤</span> {{workout.name}}
                                     </a>
