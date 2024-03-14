@@ -275,6 +275,33 @@ i {
     text-align: center;
 }
 
+.form-content div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-content select{
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.175);
+    margin: 15px;
+    min-width: 80%;
+    max-width: 90%;
+    text-align: center;
+    color: inherit;
+    background-color: #2c2c2c;
+    border: 2px solid #333333;
+    border-radius: .25rem;
+    font-size: 14px;
+}
+
+.form-content select option{
+    transition: all 0.5s ease;
+}
+
+.form-content select option:hover{
+    background-color: #666666;
+}
+
 .form-content .helptext{
     display: none;
 }
@@ -600,3 +627,6 @@ i {
     justify-content: space-between;
 }
 
+.space-evenly{
+    justify-content: space-evenly;
+}

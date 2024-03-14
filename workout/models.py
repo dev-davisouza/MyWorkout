@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 # Human body section:
@@ -135,8 +136,10 @@ class Exercise(models.Model):
     description = models.TextField("Exercise description")
     difficulty = models.CharField("Select the difficulty", max_length=1,
                                   choices=EXERCISE_DIFFICULTY)
-    muscles = models.ManyToManyField("Muscle", related_name="Muscle", blank=True)
-    muscle_group = models.ManyToManyField("MuscleGroup", related_name="MuscleGroup")
+    muscles = models.ManyToManyField("Muscle", related_name="Muscle",
+                                     blank=True)
+    muscle_group = models.ManyToManyField("MuscleGroup",
+                                          related_name="MuscleGroup")
     slug = models.SlugField(unique=True, default="")
     resistance_profile = models.CharField("Resistance profile",
                                           choices=RES_PROFILE,
@@ -216,8 +219,10 @@ class Exercise(models.Model):
 class SetExerciseRelationship(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     sets = models.IntegerField("Qty of Sets", default=1)
-    initial_margin_expected_reps = models.IntegerField("Min. of reps: (opcional)", blank=True)
-    final_margin_expected_reps = models.IntegerField("Max. of reps: (opcional)", blank=True)
+    initial_margin_expected_reps = models.IntegerField("Min. of reps: (opcional)",
+                                                       null=True, blank=True)
+    final_margin_expected_reps = models.IntegerField("Max. of reps: (opcional)",
+                                                     null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
@@ -242,10 +247,20 @@ class Workout(models.Model):
     set_exercise_relationships = models.ManyToManyField(SetExerciseRelationship,
                                                         blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    slug = models.SlugField(unique=True, default="")
+    slug = models.SlugField(unique=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('workout:myworkout', kwargs={"slug": self.slug})
+
+    def generate_slug(self):
+        slug = slugify(self.name)
+        return slug
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.generate_slug()
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name

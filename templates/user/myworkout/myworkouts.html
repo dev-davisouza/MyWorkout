@@ -1,16 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{title}}{% endblock title %}
 {% block content %}
     <main class="main-content">
-        {% if is_add_workout or is_add_set_exercise_relationship %}
         <div class="form-content">
             <form action="" method=POST>
                 {% csrf_token %}
-                {{form}}
+                {% if is_add_workout %}
+                    <div>
+                        {{form.name.label}}:
+                        {{form.name}}
+                    </div>
+                    <div>
+                        {{form.set_exercise_relationships.label}}:
+                    </div>
+                    <section class="flex-container centered-x centered-y">
+                        {{form.set_exercise_relationships}} 
+                        <a href="{% url "workout:add-set_exercise_relationship" %}" 
+                        data-popup="yes" target="_blank">
+                            <img 
+                            src="{% static "img/icons/icon-addlink.svg" %}" alt=""
+                            title="Add new Set X Exercise relationship">
+                        </a>
+                    </section>
+                {% elif is_add_set_exercise_relationship %}
+                    {{form}}
+                {% endif %}
                 <button class="form-cta" type="submit">Submit</button>
             </form>
         </div>
-        {% elif is_myworkout %}
+        {% if is_myworkout %}
             {% include "./partials/workout-card.html" %}
         {% endif %}
     </main>

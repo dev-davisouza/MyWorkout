@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.db.models import Q
 from . import models
 from .forms import WorkoutForm, SetExerciseRelationshipForm
+from django.contrib import messages
 
 
 def bones(request):
@@ -166,7 +167,8 @@ def add_set_exercise_relationship(request):
             f = form.save(commit=False)
             f.user = request.user
             f.save()
-            return redirect('user:my-profile')
+            messages.success(request, "New Relationship added!")
+            return redirect('workout:add-set_exercise_relationship')
 
     form = SetExerciseRelationshipForm()
     context = {
