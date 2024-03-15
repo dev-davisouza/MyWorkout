@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url "workout:download-pdf" item.slug%}">
                     <img class="card-downloads-icons"
                         src="{%static "img/icons/file-formats/pdf.svg"%}" 
                         alt=""
@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{% url "workout:download-xls" item.slug%}">
                     <img class="card-downloads-icons" 
                         src="{%static "img/icons/file-formats/xls.svg"%}" 
                         alt=""

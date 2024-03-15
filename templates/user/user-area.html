@@ -16,13 +16,29 @@
                     <details class="user-card-details">
                         <summary>
                             My Workouts:
+                            <div class="inline">
+                                <a target="_blank" href="{% url "workout:add-workout" %}">
+                                    <img src="{% static "img/icons/icon-addlink.svg" %}" 
+                                    title="Add a Workout">
+                                </a> 
+                            </div>
                         </summary>
                         <ul class="user-card-details-list">
                             {% for workout in my_workouts %}
                                 <li>
-                                    <a href="{{workout.get_absolute_url}}">
-                                        <span style="font-size:10px; vertical-align: middle;">➤</span> {{workout.name}}
-                                    </a>
+                                    <div class="flex-container space-between">
+                                        <a href="{{workout.get_absolute_url}}">
+                                            <span style="font-size:10px; vertical-align: middle;">➤</span> {{workout.name}}
+                                        </a>
+                                        <div>
+                                            <a href="{% url "workout:delete-myworkout" workout.slug %}">
+                                                <img src="{% static "img/icons/icon_deletelink.svg" %}" title="Delete Workout">
+                                            </a>
+                                            <a href="{% url "workout:change-myworkout" workout.slug %}">
+                                                <img src="{% static "img/icons/icon-changelink.svg" %}" title="Change Workout">
+                                            </a>
+                                        </div>
+                                    </div> 
                                 </li>
                             {% endfor %}
                         </ul>

@@ -241,6 +241,19 @@ class SetExerciseRelationship(models.Model):
         else:
             return f"{self.exercise.name}"
 
+    def get_reps_margin(self):
+        if self.initial_margin_expected_reps and not self.final_margin_expected_reps:
+            return f"{self.initial_margin_expected_reps}"
+
+        elif self.final_margin_expected_reps and not self.initial_margin_expected_reps:
+            return f"{self.final_margin_expected_reps}"
+
+        elif self.initial_margin_expected_reps and self.final_margin_expected_reps:
+            return f"{self.initial_margin_expected_reps}-{self.final_margin_expected_reps}"
+
+        else:
+            return "0"
+
 
 class Workout(models.Model):
     name = models.CharField("Workout name", max_length=50, blank=True)

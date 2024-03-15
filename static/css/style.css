@@ -587,6 +587,16 @@ i {
     border: 2px solid black;
 }
 
+.user-card-details-list a{
+    text-decoration: solid;
+    color: yellow;
+    transition: all 0.5s ease-in-out;
+}
+
+.user-card-details-list a:hover{
+    color: white;
+}
+
 /*Generics*/
 
 .flex-container{
@@ -629,4 +639,8 @@ i {
 
 .space-evenly{
     justify-content: space-evenly;
+}
+
+.inline{
+    display: inline;
 }
