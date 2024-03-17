@@ -26,7 +26,8 @@
                     <button class="form-cta" type="submit">Submit</button>
                 </form>
             </div>
-        {% elif is_add_set_exercise_relationship %}
+        {% endif %}
+        {% if is_add_set_exercise_relationship %}
             <div class="form-content">
                 <form action="" method=POST>
                     {% csrf_token %}
@@ -35,8 +36,62 @@
                 </form>
             </div>
         {% endif %}
-        {% if is_myworkout %}
-            {% include "./partials/workout-card.html" %}
+        {% if is_myworkouts %}
+            <section class="main-content-cards">
+                {% for workout in workouts %}
+                <article class=" main-content-cards card">
+                    <header class="card-title">
+                        <h1>{{workout.name}}</h1>
+                    </header>
+                    <ul class="card-downloads">
+                    <p><b>Download your Workout:</b></p>
+                
+                        <!-- Format files -->
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/csv.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as CSV file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-pdf" workout.slug%}">
+                                <img class="card-downloads-icons"
+                                    src="{%static "img/icons/file-formats/pdf.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as PDF file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/txt.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as TXT file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-xls" workout.slug%}">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/xls.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as Excel(XLS) file.">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card-section">
+                        <hr class="section-break">
+                        <div>
+                            <h4>{{workout.get_total_exercises}}</h4>
+                            <p>Number of Exercises</p>
+                        </div>
+                        <hr class="section-break">
+                    </div>
+                    <a href="{{workout.get_absolute_url}}" class="card-cta"><b>View {{workout.name}} Workout!</b></a>
+                </article>
+                {% endfor %}
+            </section>
         {% endif %}
     </main>
 {% endblock content %}

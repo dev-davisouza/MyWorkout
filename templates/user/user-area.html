@@ -15,7 +15,10 @@
                 {% else %}
                     <details class="user-card-details">
                         <summary>
-                            My Workouts:
+                            <a href="{% url "workout:myworkouts" %}"
+                               style="color:yellow; text-decoration:none;">
+                                My Workouts:
+                            </a> 
                             <div class="inline">
                                 <a target="_blank" href="{% url "workout:add-workout" %}">
                                     <img src="{% static "img/icons/icon-addlink.svg" %}" 
@@ -50,6 +53,5 @@
             </section>
         </div>
        
-    </main>
-    
+    </main> 
 {% endblock content %}

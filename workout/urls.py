@@ -25,9 +25,10 @@ urlpatterns = [
          name="delete-set_exercise_relationship"),
 
     path('add-workout/', views.add_workout, name="add-workout"),
-    path('myworkout/<slug>', views.view_myworkout, name="myworkout"),
-    path('change-myworkout/<slug>', views.edit_myworkout, name="change-myworkout"),
-    path('delete-myworkout/<slug>', views.delete_myworkout, name="delete-myworkout"),
+    path('myworkout/<slug>/', views.view_myworkout, name="myworkout"),
+    path('change-myworkout/<slug>/', views.edit_myworkout, name="change-myworkout"),
+    path('delete-myworkout/<slug>/', views.delete_myworkout, name="delete-myworkout"),
+    path('', views.myworkouts, name="myworkouts"),
 
     # Downloads:
     path('download-xlx/myworkout/<slug>', views.download_myworkout_as_xls, name="download-xls"),

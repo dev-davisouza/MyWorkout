@@ -275,5 +275,11 @@ class Workout(models.Model):
 
         super().save(*args, **kwargs)
 
+    def get_total_exercises(self):
+        unique_exercises = set()
+        for relationship in self.set_exercise_relationships.all():
+            unique_exercises.add(relationship.exercise)
+        return len(unique_exercises)
+
     def __str__(self):
         return self.name

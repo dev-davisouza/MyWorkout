@@ -12,7 +12,3 @@ class WorkoutForm(forms.ModelForm):
     class Meta:
         model = Workout
         exclude = ('user', 'slug')
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['set_exercise_relationships'].widget.attrs.update({'class': 'hidden'})

@@ -120,8 +120,10 @@ def add_workout(request):
             f = form.save(commit=False)
             f.user = request.user
             f.save()
+            form.save_m2m()
             return redirect('user:my-profile')
-    form = WorkoutForm()
+    else:
+        form = WorkoutForm()
 
     context = {
         'form': form,
@@ -138,7 +140,7 @@ def view_myworkout(request, slug):
     for _ in count_exercises:
         count += 1
     context = {
-        'item': workout,
+        'workout': workout,
         'is_myworkout': True,
         "title": f"{workout.name} - ",
         "total_exercises": count,
@@ -174,3 +176,13 @@ def delete_myworkout(request, slug):
             request, "Yo don't have permission for this.")
         return redirect('home:homepage')
     return redirect('user:my-profile')
+
+
+def myworkouts(request):
+    myworkouts = models.Workout.objects.filter(user=request.user)
+    context = {
+        'workouts': myworkouts,
+        'is_myworkouts': True,
+        "title": "My Workouts - ",
+    }
+    return render(request, "user/myworkout/myworkouts.html", context)
