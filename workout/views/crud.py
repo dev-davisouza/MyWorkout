@@ -88,7 +88,7 @@ def edit_set_exercise_relationship(request, id):
                                            user=request.user.profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "Relationship changed with success!")
+            messages.success(request, f"{relationship} changed with success!")
             return redirect('user:my-profile')
     form = SetExerciseRelationshipForm(instance=relationship,
                                        user=request.user)
@@ -105,7 +105,7 @@ def delete_set_exercise_relationship(request, id):
                                                               user=request.user)  # noqa
     if relationship.user == request.user:
         relationship.delete()
-        messages.success(request, "Relatioship deleted with success!")
+        messages.success(request, f"{relationship} deleted with success!")
     else:
         messages.error(
             request, "Yo don't have permission for this.")
@@ -120,6 +120,7 @@ def add_workout(request):
             f = form.save(commit=False)
             f.user = request.user
             f.save()
+            messages(request, "A new Workout created with success!")
             form.save_m2m()
             return redirect('user:my-profile')
     else:
@@ -135,15 +136,10 @@ def add_workout(request):
 
 def view_myworkout(request, slug):
     workout = models.Workout.objects.get(slug=slug)
-    count_exercises = workout.set_exercise_relationships.all()
-    count = 0
-    for _ in count_exercises:
-        count += 1
     context = {
         'workout': workout,
         'is_myworkout': True,
         "title": f"{workout.name} - ",
-        "total_exercises": count,
     }
     return render(request, "user/myworkout/myworkouts.html", context)
 
@@ -155,7 +151,7 @@ def edit_myworkout(request, slug):
                            instance=workout)
         if form.is_valid():
             form.save()
-            messages.success(request, "Workout changed with success!")
+            messages.success(request, f"{workout} changed with success!")
             return redirect('user:my-profile')
     form = WorkoutForm(instance=workout)
     context = {
@@ -170,7 +166,7 @@ def delete_myworkout(request, slug):
     workout = models.Workout.objects.get(slug=slug, user=request.user)
     if workout.user == request.user:
         workout.delete()
-        messages.success(request, "Workout deleted with success!")
+        messages.success(request, f"{workout} deleted with success!")
     else:
         messages.error(
             request, "Yo don't have permission for this.")

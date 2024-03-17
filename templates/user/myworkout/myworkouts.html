@@ -93,5 +93,25 @@
                 {% endfor %}
             </section>
         {% endif %}
+        {% if is_myworkout %}
+        <table class="my-workouts-table">
+            <thead>
+              <tr>
+                <th scope="col">Exercises</th>
+                <th scope="col">Sets</th>
+                <th scope="col">Reps margin</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for exercise in workout.set_exercise_relationships.all %}
+                    <tr>
+                        <td><a href="{{exercise.exercise.get_absolute_url}}">{{exercise.exercise.name}}</a></td>
+                        <td>{{exercise.sets}}</td>
+                        <td>{{exercise.get_reps_margin}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
     </main>
 {% endblock content %}

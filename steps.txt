@@ -4,6 +4,6 @@
 4. Create exercises; <-- Complete
 5. Create workout;
     - List MyWorkout; <-- Complete
-    - Details MyWorkout
+    - Details MyWorkout; <-- Complete
     - Make Admin workouts;
 6. Create Json response as an API!

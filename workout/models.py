@@ -236,7 +236,7 @@ class SetExerciseRelationship(models.Model):
             return f"{self.exercise.name} {self.sets}x{self.initial_margin_expected_reps}-{self.final_margin_expected_reps}"
 
         elif not self.final_margin_expected_reps and not self.initial_margin_expected_reps:
-            return f"{self.sets} of {self.exercise.name}"
+            return f"{self.sets} sets of {self.exercise.name}"
 
         else:
             return f"{self.exercise.name}"

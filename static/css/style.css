@@ -558,6 +558,27 @@ i {
     padding: 10px;
 }
 
+.my-workouts-table{
+    height: fit-content;
+    width: 100%;
+}
+
+.my-workouts-table th, td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.my-workouts-table a{
+    color: yellow;
+    text-decoration: solid;
+    transition: all 0.3s ease-in-out;
+}
+
+.my-workouts-table a:hover{
+    color: white;
+}
+
 .another-container{
     border: 1px solid #666666;
     border-radius: 8px;
