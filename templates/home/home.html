@@ -9,8 +9,46 @@
                 <header class="card-title">
                     <h1>Upper Body</h1>
                 </header>
+                <ul class="card-downloads">
+                    <p><b>Download this Workout:</b></p>
+                        <!-- Format files -->
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/csv.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as CSV file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-pdf" 'admin-upper-body'%}">
+                                <img class="card-downloads-icons"
+                                    src="{%static "img/icons/file-formats/pdf.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as PDF file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/txt.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as TXT file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-xls" 'admin-upper-body' %}">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/xls.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as Excel(XLS) file.">
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="section-break">
+
                 <img id="Upperbody" class="card-icon" src="{% static 'img/icons/body_parts/upper-body (front).svg' %}" alt="Upper body">
-                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+                <a href="{% url "workout:myworkout" 'admin-upper-body' %}" class="card-cta"> <b>See the Workout!</b> </a>
             </article>
 
             <!-- Lower body -->
@@ -18,8 +56,45 @@
                 <header class="card-title">
                     <h1>Lower Body</h1>
                 </header>
+                <ul class="card-downloads">
+                    <p><b>Download this Workout:</b></p>
+                        <!-- Format files -->
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/csv.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as CSV file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-pdf" 'admin-lower-body'%}">
+                                <img class="card-downloads-icons"
+                                    src="{%static "img/icons/file-formats/pdf.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as PDF file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/txt.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as TXT file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-xls" 'admin-lower-body' %}">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/xls.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as Excel(XLS) file.">
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="section-break">
                 <img class="card-icon" src="{% static "img/icons/body_parts/legs.svg" %}" alt="Lower body">
-                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+                <a href="{% url "workout:myworkout" 'admin-lower-body' %}" class="card-cta"> <b>See the Workout!</b> </a>
             </article>
 
             <!-- Push Day -->
@@ -27,8 +102,45 @@
                 <header class="card-title">
                     <h1>Push day</h1>
                 </header>
+                <ul class="card-downloads">
+                    <p><b>Download this Workout:</b></p>
+                        <!-- Format files -->
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/csv.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as CSV file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-pdf" 'admin-push-day'%}">
+                                <img class="card-downloads-icons"
+                                    src="{%static "img/icons/file-formats/pdf.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as PDF file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/txt.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as TXT file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-xls" 'admin-push-day' %}">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/xls.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as Excel(XLS) file.">
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="section-break">
                 <img class="card-icon" src="{% static "img/icons/exercises/bench-press.svg" %}" alt="Push day">
-                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+                <a href="{% url "workout:myworkout" 'admin-push-day' %}" class="card-cta"> <b>See the Workout!</b> </a>
             </article>
 
             <!-- Pull Day -->
@@ -36,8 +148,45 @@
                 <header class="card-title">
                     <h1>Pull day</h1>
                 </header>
+                <ul class="card-downloads">
+                    <p><b>Download this Workout:</b></p>
+                        <!-- Format files -->
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/csv.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as CSV file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-pdf" 'admin-pull-day'%}">
+                                <img class="card-downloads-icons"
+                                    src="{%static "img/icons/file-formats/pdf.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as PDF file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/txt.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as TXT file.">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url "workout:download-xls" 'admin-pull-day' %}">
+                                <img class="card-downloads-icons" 
+                                    src="{%static "img/icons/file-formats/xls.svg"%}" 
+                                    alt=""
+                                    title="Download your workout as Excel(XLS) file.">
+                            </a>
+                        </li>
+                    </ul>
+                    <hr class="section-break">
                 <img class="card-icon" src="{% static "img/icons/exercises/pull-up.svg" %}" alt="Pull day">
-                <a href="" class="card-cta"> <b>See the Workouts!</b> </a>
+                <a href="{% url "workout:myworkout" 'admin-pull-day' %}" class="card-cta"> <b>See the Workout!</b> </a>
             </article>
 
         </section>

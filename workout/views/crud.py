@@ -120,7 +120,7 @@ def add_workout(request):
             f = form.save(commit=False)
             f.user = request.user
             f.save()
-            messages(request, "A new Workout created with success!")
+            messages.success(request, "A new Workout created with success!")
             form.save_m2m()
             return redirect('user:my-profile')
     else:

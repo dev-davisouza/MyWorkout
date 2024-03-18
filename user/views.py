@@ -84,5 +84,6 @@ def my_profile(request):
     my_workouts = Workout.objects.filter(user=request.user)
     context = {
         'my_workouts': my_workouts,
+        'title': "My profile - ",
     }
     return render(request, "user/user-area.html", context)
