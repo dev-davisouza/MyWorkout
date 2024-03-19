@@ -5,7 +5,7 @@ app_name = "workout"
 
 urlpatterns = [
     path('bones/', views.bones, name="list-bones"),
-    path('joints/', views.joints, name="list-joints"),
+    path('joints/', views.JointsView.as_view(), name="list-joints"),
     path('muscles/', views.muscles, name="list-muscles"),
     path('exercises/', views.exercises, name="list-exercises"),
 

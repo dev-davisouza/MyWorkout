@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from . import models
 
+
+TEMPLATE = "workout/list-structures.html"
 
 def bones(request):
     is_spine_bone_param = request.GET.get('is_spine_bone')
@@ -35,6 +38,35 @@ def know_bone(request, slug):
                   context)
 
 
+"""class JointsView(TemplateView):
+    template_name = TEMPLATE
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            "items": models.Joint.objects.all(),
+            "is_joint": True,
+            "title": "Joints - ",
+        })
+        return context"""
+
+
+class JointsView(ListView):
+    model = models.Joint
+    template_name = TEMPLATE
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add your context data here
+        context.update({
+            "items": models.Joint.objects.all(),
+            "is_joint": True,
+            "title": "Joints - ",
+        })
+        return context
+
+
+"""
 def joints(request):
     joints = models.Joint.objects.all()
 
@@ -44,7 +76,7 @@ def joints(request):
         "title": "Joints - ",
     }
 
-    return render(request, "workout/list-structures.html", context)
+    return render(request, "workout/list-structures.html", context)"""
 
 
 def know_joint(request, slug):
