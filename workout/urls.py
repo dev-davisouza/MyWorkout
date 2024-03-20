@@ -33,4 +33,11 @@ urlpatterns = [
     # Downloads:
     path('download-xlx/myworkout/<slug>', views.download_myworkout_as_xls, name="download-xls"),
     path('download-pdf/myworkout/<slug>', views.download_myworkout_as_pdf, name="download-pdf"),
+
+    # Api responses:
+    path('bones/api/v1', views.bonesApi, name="list-bones-api"),
+    path('joints/api/v1', views.JointsViewApi.as_view(), name="list-joints-api"),
+    path('muscles/api/v1', views.MusclesViewApi.as_view(), name="list-muscles-api"),
+    path('exercises/api/v1', views.ExercisesViewApi.as_view(), name="list-exercises-api"),
+
 ]
