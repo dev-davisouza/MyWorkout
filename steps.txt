@@ -5,5 +5,5 @@
 5. Create workout;
     - List MyWorkout; <-- Complete
     - Details MyWorkout; <-- Complete
-    - Make Admin workouts;
-6. Create Json response as an API!
+    - Make Admin workouts; <-- Complete
+6. Create Json response as an API! <-- Complete

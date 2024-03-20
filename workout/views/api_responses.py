@@ -10,7 +10,11 @@ def iterate_m2m_items(model_object: Union[Bone, Joint, MuscleGroup, Exercise],
     objects_list = []
     for obj in getattr(model_object, mtm_field).all():
         objects_list.append(getattr(obj, parameter))
-    return objects_list
+    if len(objects_list) == 1:
+        for _ in objects_list:
+            return _
+    else:
+        return objects_list
 
 
 def bonesApi(request):
