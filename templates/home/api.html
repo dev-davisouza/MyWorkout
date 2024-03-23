@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock title %}
+{% block content %}
+    <main class="main-content-block">
+        <h1>Exercises API</h1>
+        <p class="gray-text">Take data from this tool!</p>
+        <br>
+        <hr class="section-break">
+        <br>
+        <h3>Returns a list of exercises and its descriptions,
+            steps, target muscles and more. Additionally,
+            you can take data of bones, joints and muscles! 
+        </h3>
+        <br>
+        <hr class="section-break">
+        <p style="font-size: 14px;">
+            <code class="code-background code-paragraph http-text">GET</code>
+            <code class="code-background code-paragraph">{% url "workout:list-exercises-api" %}</code>
+        </p>
+        <p>This will returns a list of the exercises available:</p>
+        {% for joint in joints %}
+        é os guri
+        {% endfor %}
+    </main>
+{% endblock content %}

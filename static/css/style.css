@@ -95,6 +95,12 @@ i {
     justify-content: center;
 }
 
+.main-content-block{
+    width: 60%;
+    margin: 40px auto;
+    text-align: center;
+}
+
 .main-content-cards{
     display: flex;
     flex-wrap: wrap;
@@ -222,6 +228,20 @@ i {
 
 .card-downloads-icons{
     height: 30px;
+}
+
+/* Code format */
+.code-background{
+    background-color: #555555;
+    border-radius: 4px;
+}
+
+.code-paragraph{
+    padding: 3px;
+}
+
+.http-text{
+    color: #05B1F3;
 }
 
 /* Form */
@@ -664,4 +684,12 @@ i {
 
 .inline{
     display: inline;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}
+
+.gray-text{
+    color: #666666;
 }

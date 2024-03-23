@@ -1,6 +1,10 @@
 {% load static %}
 <nav class="sidebar">
     <ul>
+        <li><a href="{% url "home:about-api" %}">About API</a></li>
+        <div class="flex-container centered-x">
+            <hr class="section-break">
+        </div>
         <li><a href="{% url "workout:list-exercises" %}">Exercises</a></li>
         <li><a href="#">Workouts</a></li>
         <div class="flex-container centered-x">
