@@ -2,6 +2,7 @@ from typing import Union
 from django.views.generic import ListView
 from django.http import JsonResponse
 from workout.models import Bone, Joint, MuscleGroup, Exercise
+from django.forms.models import model_to_dict
 
 
 def iterate_m2m_items(model_object: Union[Bone, Joint, MuscleGroup, Exercise],
@@ -17,11 +18,40 @@ def iterate_m2m_items(model_object: Union[Bone, Joint, MuscleGroup, Exercise],
         return objects_list
 
 
-def bonesApi(request):
-    objects = Bone.objects.all().values('name', 'description',
-                                        'is_spine_bone', 'is_skull_bone')
-    return JsonResponse(
-            list(objects),
+class BonesViewApi(ListView):
+    model = Bone
+    context_object_name = 'bones'
+
+    def get_queryset(self):
+        return Bone.objects.all()
+    
+    def get_queryset_as_dict(self):
+        objects = [model_to_dict(obj) for obj in self.get_queryset()]
+        for obj_dict in objects:
+            obj_dict.pop('id', None)
+            obj_dict.pop('cover', None)
+            obj_dict.pop('slug', None)
+        return objects
+    
+
+    def render_to_response(self, context, **response_kwargs):
+        bones = self.get_context_data()[self.context_object_name]
+        bone_data = []
+
+        for bone in bones:
+            bone_dict = {
+                'name': bone.name,
+                'description': bone.description,
+                'muscles': iterate_m2m_items(bone, 'muscles', 'name'),
+                'is_spine_bone': bone.is_spine_bone,
+                'is_skull_bone': bone.is_skull_bone,
+            }
+            bone_data.append(bone_dict)
+
+        self.bone_data = bone_data
+
+        return JsonResponse(
+            list(bone_data),
             safe=False
         )
 
@@ -29,6 +59,18 @@ def bonesApi(request):
 class JointsViewApi(ListView):
     model = Joint
     context_object_name = 'joints'
+
+    def get_queryset(self):
+        return Joint.objects.all()
+    
+    def get_queryset_as_dict(self):
+        objects = [model_to_dict(obj) for obj in self.get_queryset()]
+        for obj_dict in objects:
+            obj_dict.pop('id', None)
+            obj_dict.pop('cover', None)
+            obj_dict.pop('slug', None)
+        return objects
+    
 
     def render_to_response(self, context, **response_kwargs):
         joints = self.get_context_data()[self.context_object_name]
@@ -47,6 +89,8 @@ class JointsViewApi(ListView):
             }
             joint_data.append(joint_dict)
 
+        self.joint_data = joint_data
+
         return JsonResponse(
             list(joint_data),
             safe=False
@@ -57,12 +101,15 @@ class MusclesViewApi(ListView):
     model = MuscleGroup
     context_object_name = 'muscles'
 
+    def get_queryset(self):
+        return MuscleGroup.objects.all()
+
     def render_to_response(self, context, **response_kwargs):
         muscles = self.get_context_data()[self.context_object_name]
         muscle_data = []
 
         for muscle in muscles:
-            joint_dict = {
+            muscle_dict = {
                 'name': muscle.name,
                 'description': muscle.description,
                 'scientific_name': muscle.scientific_name,
@@ -73,7 +120,7 @@ class MusclesViewApi(ListView):
                 'related_exercises': iterate_m2m_items(
                     muscle, "related_exercises", "name"),
             }
-            muscle_data.append(joint_dict)
+            muscle_data.append(muscle_dict)
 
         return JsonResponse(
             list(muscle_data),
@@ -84,6 +131,9 @@ class MusclesViewApi(ListView):
 class ExercisesViewApi(ListView):
     model = Exercise
     context_object_name = 'exercises'
+
+    def get_queryset(self):
+        return Exercise.objects.all()
 
     def render_to_response(self, context, **response_kwargs):
         exercises = self.get_context_data()[self.context_object_name]

@@ -8,8 +8,8 @@
         <hr class="section-break">
         <br>
         <h3>Returns a list of exercises and its descriptions,
-            steps, target muscles and more. Additionally,
-            you can take data of bones, joints and muscles! 
+            steps, target exercises and more. Additionally,
+            you can take data of bones, exercises and exercises! 
         </h3>
         <br>
         <hr class="section-break">
@@ -17,9 +17,70 @@
             <code class="code-background code-paragraph http-text">GET</code>
             <code class="code-background code-paragraph">{% url "workout:list-exercises-api" %}</code>
         </p>
-        <p>This will returns a list of the exercises available:</p>
-        {% for joint in joints %}
-        é os guri
-        {% endfor %}
+        <p>This will returns a list of the exercises available in JSON response. 
+            If formatted, it will looks like this:
+        </p>
+ 
+        <div class="flex-container centered-x">
+            <div class="cube-container flex centered-y column">
+                <div class="within-container">
+                    {% for exercise in exercises %}
+                        <button type="button" class="collapsible">
+                            {{exercise.id}}
+                        </button>
+                        <div class="colapse-content">
+                            <p>name: "{{exercise.name}}"</p>
+                            <p>difficulty: "{{exercise.get_difficulty_display}}"</p>
+                            <p>resistance profile: "{{exercise.get_resistance_profile_display}}"</p>
+                            
+                            <button type="button" class="collapsible">
+                                muscles:
+                                </button>
+                            <div class="colapse-content">
+                                <ul>
+                                {% for muscle in exercise.muscles.all %}
+                                    <li>{{muscle}};</li>
+                                {% endfor %}
+                                {% for muscle in exercise.muscle_group.all %}
+                                    <li>{{muscle}};</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+
+                            <button type="button" class="collapsible">
+                                description:
+                                </button>
+                            <div class="colapse-content">
+                                "{{exercise.description}}"
+                            </div>
+                            <button type="button" class="collapsible">
+                                steps (HTML allowed):
+                                </button>
+                            <div class="colapse-content">
+                                "{{exercise.steps|safe}}"
+                            </div>
+                        </div>
+                        <hr class="colapse-content-section-break">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </main>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+            content.style.display = "none";
+            } else {
+            content.style.display = "block";
+            }
+        });
+        } 
+    </script>
 {% endblock content %}
