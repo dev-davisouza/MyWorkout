@@ -37,6 +37,24 @@ i {
     flex-wrap: wrap;
 }
 
+.cube-container{
+    width: 80%;
+    border-radius: 5px;
+    background-color: #555555;
+    margin: 10px;
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.within-container{
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    width: 95%;
+    margin: 20px 5px;
+    color: #1f1f1f;
+    text-align: start;
+}
+
 /* Main Header */
 
 .main-header{
@@ -244,6 +262,43 @@ i {
     color: #05B1F3;
 }
 
+/* API page */
+
+.collapsible{
+    color: #000;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.collapsible::after {
+    content: '\25BA'; /* Unicode for right-pointing triangle */
+    margin-left: 5px;
+  }
+
+.colapse-content{
+    text-align: start;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #e9e9e9;
+    margin-bottom: 10px;
+}
+
+.colapse-content-section-break{
+    width: 100%;
+    border-radius: 30px;
+    color: #555555;
+}
+
+.colapse-content ul{
+    list-style-type: disc;
+}
+
 /* Form */
 .form-content{
     /* Rules */
@@ -400,6 +455,10 @@ i {
     border: 1px solid #4d86c4;
     background: #cce5ff;
     color: #4d86c4;
+}
+
+.message a{
+    color: inherit;
 }
 
 .close-message {
@@ -693,3 +752,45 @@ i {
 .gray-text{
     color: #666666;
 }
+
+.flex{
+    display: flex;
+}
+
+
+.selector {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+  
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+  
+.slide {
+    flex: 0 0 auto;
+    width: 100%;
+}
+  
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+  
+.prev {
+    left: 0;
+}
+  
+.next {
+    right: 0;
+}
+  
