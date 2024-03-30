@@ -22,6 +22,7 @@ class Bone(models.Model):
     cover = models.FileField(upload_to="images/bones/%Y/%m/%d/", validators=[
         FileExtensionValidator(['svg'])
     ], blank=True)
+    attribution = models.TextField(blank=True)
     description = models.TextField("Some description of the bone")
     muscles = models.ManyToManyField("Muscle", blank=True)
     slug = models.CharField(blank=True, max_length=50)
@@ -50,6 +51,7 @@ class Joint(models.Model):
     cover = models.FileField(upload_to="images/joints/%Y/%m/%d/", validators=[
         FileExtensionValidator(['svg'])
     ])
+    attribution = models.TextField(blank=True)
     bones = models.ManyToManyField("Bone")
     allowed_movements = models.ManyToManyField("MovimentType")
 
@@ -79,6 +81,7 @@ class Muscle(models.Model):
     cover = models.FileField(upload_to="images/muscles/%Y/%m/%d/", validators=[
         FileExtensionValidator(['svg'])
     ], blank=True)
+    attribution = models.TextField(blank=True)
     description = models.TextField("Some description of the muscle",
                                    blank=True)
     related_exercises = models.ManyToManyField("Exercise")
@@ -132,6 +135,7 @@ class Exercise(models.Model):
 
     cover = models.FileField(upload_to="images/exercises/%Y/%m/%d/",
                              validators=[FileExtensionValidator(['svg'])])
+    attribution = models.TextField(blank=True)
     name = models.CharField("Exercise name", max_length=120)
     description = models.TextField("Exercise description")
     difficulty = models.CharField("Select the difficulty", max_length=1,

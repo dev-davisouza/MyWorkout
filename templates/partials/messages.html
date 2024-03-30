@@ -4,7 +4,7 @@
             {% for message in messages %}
                 <div class="message {{ message.tags }}">
                     <center>
-                        {{ message }}
+                        {{ message | safe}}
                         <button class="close-message" onclick="closeMessage(this)">X</button>
                     </center>
                 </div>

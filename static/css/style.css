@@ -457,6 +457,10 @@ i {
     color: #4d86c4;
 }
 
+.message a{
+    color: inherit;
+}
+
 .close-message {
     background-color: transparent;
     color:#000;
