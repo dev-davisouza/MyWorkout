@@ -177,6 +177,10 @@ i {
     border-radius: 10px;
 }
 
+.card-details p a{
+    color: inherit;
+}
+
 .card-details-list{
     all: unset;
     text-align: start;

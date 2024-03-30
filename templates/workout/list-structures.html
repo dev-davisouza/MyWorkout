@@ -181,16 +181,21 @@
                                 </ul>
                             </details>
                         {% endif %}
-                            <details class="card-details">
+                        <details class="card-details">
                             <summary>
                                 <b>Description:</b>
                             </summary>
-                            <ul>
-                                <li>
-                                    {{item.description|safe}}
-                                </li>
-                            </ul>
+                            <p>{{item.description|safe}}</p>
                         </details>
+                        {% if item.attribution %}
+                        <details class="card-details">
+                            <summary>
+                                <b>Attribution: <i class="fa-solid fa-closed-captioning"></i></b>
+                            </summary>
+                            <p>{{item.attribution|safe}}</p>
+                        </details>
+                           
+                        {% endif %}
                     </div>
                 </article>
             {% else %}
