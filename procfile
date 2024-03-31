@@ -1,1 +1,1 @@
-echo "web: gunicorn django_tasklist.wsgi --log-file -" > Procfile
+web: gunicorn core.wsgi
